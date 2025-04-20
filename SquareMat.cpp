@@ -151,10 +151,50 @@ namespace Matrix {
         return result;
     }
 
+    SquareMat SquareMat::operator/(double s) const {
+        SquareMat result(size);
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                result.matrix[i][j] = matrix[i][j] / s;
+            }
+        }
+        return result;
+    }
+
+    SquareMat SquareMat::operator^(int p) const {
+        if (p<0) {
+            throw std::invalid_argument("p must be positive");
+        }
+        if (p==0) {
+            SquareMat idenMat(size);
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < size; j++) {
+                    if (i==j) {
+                        idenMat.matrix[i][j] = 1;
+                    }
+                    else {
+                        idenMat.matrix[i][j] = 0;
+                    }
+                }
+            }
+            return idenMat;
+        }
+        if (p==1) {
+            return *this;
+        }
+        SquareMat result= *this;
+        for (int i = 1; i < p; i++) {
+            result=result*(*this);
+        }
+        return result;
+    }
+
 
     int SquareMat::getSize() const {
         return size;
     }
+
+
 
 
 
