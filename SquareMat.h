@@ -13,13 +13,15 @@ namespace Matrix {
     class SquareMat {
         private:
         int size;
-        double *data;
+        double **matrix;
 
         public:
             SquareMat(int n);
             SquareMat(const SquareMat& other); // Copy Constructor
             SquareMat& operator=(const SquareMat& other); // Copy Assignment Operator
             ~SquareMat();
+
+            int getSize() const;
 
             SquareMat operator+(const SquareMat& other) const;
             SquareMat operator-(const SquareMat& other) const;
@@ -51,8 +53,6 @@ namespace Matrix {
             SquareMat& operator%=(const SquareMat& other);
 
             friend std::ostream& operator<<(std::ostream& os, const SquareMat& mat);
-
-
 
     };
 
