@@ -4,11 +4,10 @@
 
 #include "SquareMat.h"
 #include <stdexcept>
+#include <cmath>
 
 
 namespace Matrix {
-
-
     SquareMat::SquareMat(int s):size(s) {
         matrix = new double*[size];
         for (int i = 0; i < size; i++) {
@@ -25,7 +24,7 @@ namespace Matrix {
 
     SquareMat::SquareMat(const SquareMat &other):size(other.size) {
         matrix = new double*[size];
-        for (int i = 0; i < size*size; i++) {
+        for (int i = 0; i < size; i++) {
             matrix[i] = new double[size];
             for (int j = 0; j < size; j++) {
                 matrix[i] = other.matrix[i];
@@ -60,7 +59,7 @@ namespace Matrix {
         }
 
         SquareMat result(size);
-        for (int i = 0; i < size * size; i++) {
+        for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 result.matrix[i][j] = matrix[i][j] + other.matrix[i][j];
             }
@@ -74,7 +73,7 @@ namespace Matrix {
         }
 
         SquareMat result(size);
-        for (int i = 0; i < size * size; i++) {
+        for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 result.matrix[i][j] = matrix[i][j] - other.matrix[i][j];
             }
@@ -84,7 +83,7 @@ namespace Matrix {
 
     SquareMat SquareMat::operator-() const{
         SquareMat result(size);
-        for (int i = 0; i < size * size; i++) {
+        for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 result.matrix[i][j] = -matrix[i][j];
             }
@@ -97,17 +96,61 @@ namespace Matrix {
             throw std::invalid_argument("Matrices must have the same size");
         }
         SquareMat result(size);
-        double sum = 0;
-        for (int i = 0; i < size * size; i++) {
+        for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-
+                double sum = 0;
+                for (int k = 0; k < size; k++) {
+                    sum += matrix[i][k] * other.matrix[k][j];
+                }
+                result.matrix[i][j] = sum;
             }
-
-
-
         }
+        return result;
+    }
+
+    SquareMat SquareMat::operator*(double s) const {
+        SquareMat result(size);
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                result.matrix[i][j] = matrix[i][j] * s;
+            }
+        }
+        return result;
+    }
+    SquareMat operator*(double s, const SquareMat& mat) {
+        SquareMat result(mat.getSize());
+        for (int i = 0; i < mat.getSize(); i++) {
+            for (int j = 0; j < mat.getSize(); j++) {
+                result.matrix[i][j] = s * mat.matrix[i][j];
+            }
+        }
+        return result;
+    }
+
+    SquareMat SquareMat::operator%(const SquareMat& other) const {
+        if (size != other.getSize()) {
+            throw std::invalid_argument("Matrices must have the same size");
+        }
+        SquareMat result(size);
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                result.matrix[i][j]= matrix[i][j]*other.matrix[i][j];
+            }
+        }
+        return result;
 
     }
+
+    SquareMat SquareMat::operator%(double s) const {
+        SquareMat result(size);
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                result.matrix[i][j] = fmod(matrix[i][j],s);
+            }
+        }
+        return result;
+    }
+
 
     int SquareMat::getSize() const {
         return size;

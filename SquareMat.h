@@ -28,8 +28,10 @@ namespace Matrix {
             SquareMat operator-() const;
             SquareMat operator*(const SquareMat& other) const;
             SquareMat operator*(double s) const;
+            friend SquareMat operator*(double s, const SquareMat& mat);
+
             SquareMat operator%(const SquareMat& other) const;
-            SquareMat operator%(int s) const;
+            SquareMat operator%(double s) const;
             SquareMat operator/(double s) const;
             SquareMat operator^(int p) const;
             SquareMat& operator++();
