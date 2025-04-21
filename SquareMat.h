@@ -39,7 +39,7 @@ namespace Matrix {
             SquareMat& operator--();
             SquareMat operator--(int);
             SquareMat operator~() const;
-            double operator[](std::pair<int,int>) const;
+            double operator[](const std::pair<int,int> &) const;
             double& operator[](std::pair<int,int>);
             bool operator==(const SquareMat& other) const;
             bool operator!=(const SquareMat& other) const;

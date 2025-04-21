@@ -189,14 +189,72 @@ namespace Matrix {
         return result;
     }
 
+    SquareMat& SquareMat::operator++() {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                matrix[i][j] = matrix[i][j] + 1;
+            }
+        }
+        return *this;
+    }
 
-    int SquareMat::getSize() const {
-        return size;
+    SquareMat& SquareMat::operator--() {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                matrix[i][j] = matrix[i][j] - 1;
+            }
+        }
+        return *this;
     }
 
 
 
+    SquareMat SquareMat::operator++(int) {
+        SquareMat result=*this;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                matrix[i][j] = matrix[i][j] + 1;
+            }
+        }
+        return result;
+    }
 
 
+
+    SquareMat SquareMat::operator--(int) {
+        SquareMat result=*this;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                matrix[i][j] = matrix[i][j] - 1;
+            }
+        }
+        return result;
+    }
+
+    SquareMat SquareMat::operator~() const {
+        SquareMat result(size);
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                result.matrix[j][i]=matrix[i][j];
+            }
+        }
+        return result;
+    }
+
+    double SquareMat::operator[](const std::pair<int,int> &p) const {
+        const int row=p.first;
+        const int col=p.second;
+        return matrix[row][col];
+    }
+
+    double& SquareMat::operator[](std::pair<int,int> p) {
+        int row=p.first;
+        int col=p.second;
+        return matrix[row][col];
+    }
+
+    int SquareMat::getSize() const {
+        return size;
+    }
 
 }
