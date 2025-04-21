@@ -8,6 +8,7 @@
 
 
 namespace Matrix {
+
     SquareMat::SquareMat(int s):size(s) {
         matrix = new double*[size];
         for (int i = 0; i < size; i++) {
@@ -27,7 +28,7 @@ namespace Matrix {
         for (int i = 0; i < size; i++) {
             matrix[i] = new double[size];
             for (int j = 0; j < size; j++) {
-                matrix[i] = other.matrix[i];
+                matrix[i][j] = other.matrix[i][j];
             }
         }
     }
@@ -277,9 +278,35 @@ namespace Matrix {
     }
 
     double SquareMat::operator!() const {
+        if (size == 1) {
+            return matrix[0][0];
+        }
+        if (size == 2) {
+            return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+        }
 
-
+        double det = 0;
+        for (int col = 0; col < size; ++col) {
+            SquareMat minor(size - 1);
+            for (int i = 1; i < size; ++i) {
+                int minorCol = 0;
+                for (int j = 0; j < size; ++j) {
+                    if (j == col) continue;
+                    minor.matrix[i - 1][minorCol] = matrix[i][j];
+                    minorCol++;
+                }
+            }
+            double sign;
+            if (col % 2 == 0) {
+                sign = 1;
+            } else {
+                sign = -1;
+            }
+            det += sign * matrix[0][col] * !minor;
+        }
+        return det;
     }
+
 
     SquareMat& SquareMat::operator+=(const SquareMat& other) {
         if (size!=other.size) {
@@ -319,6 +346,17 @@ namespace Matrix {
         *this=*this%other;
         return *this;
     }
+
+    std::ostream& operator<<(std::ostream& os, const SquareMat& mat) {
+        for (int i = 0; i < mat.size; ++i) {
+            for (int j = 0; j < mat.size; ++j) {
+                os << mat.matrix[i][j] << " ";
+            }
+            os << std::endl;
+        }
+        return os;
+    }
+
 
 
     double SquareMat::sumM() const {
