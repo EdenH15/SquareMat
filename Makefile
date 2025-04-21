@@ -5,9 +5,9 @@ Main: SquareMat.cpp main.cpp
 	$(CXX) $(CXXFLAGS) SquareMat.cpp main.cpp -o Main
 	./Main
 
-#test: SquareMat.cpp tests.cpp
-#	$(CXX) $(CXXFLAGS) SquareMat.cpp tests.cpp -o Test
-#	./Test
+test: SquareMat.cpp Test.cpp
+	$(CXX) $(CXXFLAGS) SquareMat.cpp Test.cpp -o Test
+	./Test
 
 valgrind: Main
 	valgrind --leak-check=full ./Main

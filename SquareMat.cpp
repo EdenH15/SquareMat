@@ -153,6 +153,9 @@ namespace Matrix {
     }
 
     SquareMat SquareMat::operator/(double s) const {
+        if (s==0) {
+            throw std::invalid_argument("Cannot divide by zero");
+        }
         SquareMat result(size);
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
