@@ -252,6 +252,84 @@ namespace Matrix {
         int col=p.second;
         return matrix[row][col];
     }
+    bool SquareMat::operator==(const SquareMat& other) const {
+       return sumM()==other.sumM();
+    }
+
+    bool SquareMat::operator!=(const SquareMat& other) const {
+        return !(*this==other);
+    }
+
+    bool SquareMat::operator<(const SquareMat& other) const {
+        return sumM()<other.sumM();
+    }
+
+    bool SquareMat::operator>(const SquareMat& other) const {
+        return sumM()>other.sumM();
+    }
+
+    bool SquareMat::operator<=(const SquareMat& other) const {
+        return *this < other || *this == other;
+    }
+
+    bool SquareMat::operator>=(const SquareMat& other) const {
+        return *this > other || *this == other;
+    }
+
+    double SquareMat::operator!() const {
+
+
+    }
+
+    SquareMat& SquareMat::operator+=(const SquareMat& other) {
+        if (size!=other.size) {
+            throw std::invalid_argument("Matrix must have the same size");
+        }
+        *this=*this+other;
+        return *this;
+    }
+    SquareMat& SquareMat::operator-=(const SquareMat& other) {
+        if (size!=other.size) {
+            throw std::invalid_argument("Matrix must have the same size");
+        }
+        *this=*this-other;
+        return *this;
+    }
+
+    SquareMat& SquareMat::operator*=(const SquareMat& other) {
+        if (size!=other.size) {
+            throw std::invalid_argument("Matrix must have the same size");
+        }
+        *this=*this*other;
+        return *this;
+    }
+
+    SquareMat& SquareMat::operator/=(double s) {
+        if (s == 0) {
+            throw std::invalid_argument("Cannot divide by zero");
+        }
+        *this=*this/s;
+        return *this;
+    }
+
+    SquareMat& SquareMat::operator%=(const SquareMat& other) {
+        if (size!=other.size) {
+            throw std::invalid_argument("Matrix must have the same size");
+        }
+        *this=*this%other;
+        return *this;
+    }
+
+
+    double SquareMat::sumM() const {
+        double sum=0;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                sum+=matrix[i][j];
+            }
+        }
+        return sum;
+    }
 
     int SquareMat::getSize() const {
         return size;

@@ -22,6 +22,7 @@ namespace Matrix {
             ~SquareMat();
 
             int getSize() const;
+            double sumM() const;
 
             SquareMat operator+(const SquareMat& other) const;
             SquareMat operator-(const SquareMat& other) const;
@@ -51,7 +52,7 @@ namespace Matrix {
             SquareMat& operator+=(const SquareMat& other);
             SquareMat& operator-=(const SquareMat& other);
             SquareMat& operator*=(const SquareMat& other);
-            SquareMat& operator/=(const SquareMat& other);
+            SquareMat& operator/=(double s);
             SquareMat& operator%=(const SquareMat& other);
 
             friend std::ostream& operator<<(std::ostream& os, const SquareMat& mat);
