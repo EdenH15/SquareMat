@@ -245,17 +245,21 @@ namespace Matrix {
         return result;
     }
 
-    double SquareMat::operator[](const std::pair<int,int> &p) const {
-        const int row=p.first;
-        const int col=p.second;
-        return matrix[row][col];
+    double* SquareMat::operator[](int row) {
+        if (row < 0 || row >= size)
+            throw std::out_of_range("Row index out of bounds");
+        return matrix[row];
     }
 
-    double& SquareMat::operator[](std::pair<int,int> p) {
-        int row=p.first;
-        int col=p.second;
-        return matrix[row][col];
+    const double* SquareMat::operator[](int row) const {
+        if (row < 0 || row >= size)
+            throw std::out_of_range("Row index out of bounds");
+        return matrix[row];
     }
+
+
+
+
     bool SquareMat::operator==(const SquareMat& other) const {
        return sumM()==other.sumM();
     }
@@ -334,6 +338,11 @@ namespace Matrix {
         return *this;
     }
 
+    SquareMat& SquareMat::operator*=(double s) {
+        *this=*this*s;
+        return *this;
+    }
+
     SquareMat& SquareMat::operator/=(double s) {
         if (s == 0) {
             throw std::invalid_argument("Cannot divide by zero");
@@ -347,6 +356,11 @@ namespace Matrix {
             throw std::invalid_argument("Matrix must have the same size");
         }
         *this=*this%other;
+        return *this;
+    }
+
+    SquareMat& SquareMat::operator%=(const double s) {
+        *this=*this%s;
         return *this;
     }
 

@@ -40,8 +40,8 @@ namespace Matrix {
             SquareMat& operator--();
             SquareMat operator--(int);
             SquareMat operator~() const;
-            double operator[](const std::pair<int,int> &) const;
-            double& operator[](std::pair<int,int>);
+            double* operator[](int row);
+            const double* operator[](int row) const;
             bool operator==(const SquareMat& other) const;
             bool operator!=(const SquareMat& other) const;
             bool operator<(const SquareMat& other) const;
@@ -52,8 +52,10 @@ namespace Matrix {
             SquareMat& operator+=(const SquareMat& other);
             SquareMat& operator-=(const SquareMat& other);
             SquareMat& operator*=(const SquareMat& other);
+            SquareMat& operator*=(double s);
             SquareMat& operator/=(double s);
             SquareMat& operator%=(const SquareMat& other);
+            SquareMat& operator%=(double s);
 
             friend std::ostream& operator<<(std::ostream& os, const SquareMat& mat);
 
