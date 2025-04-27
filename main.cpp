@@ -1,3 +1,5 @@
+//Edenhassin@gmail.com
+
 #include "SquareMat.h"
 #include <iostream>
 
@@ -9,11 +11,11 @@ int main() {
     SquareMat B(2);
 
 
-    A[{0, 0}] = 1;  A[{0, 1}] = 2;
-    A[{1, 0}] = 3;  A[{1, 1}] = 4;
+    A[0][0] = 1;  A[0][1] = 2;
+    A[1][0] = 3;  A[1][1] = 4;
 
-    B[{0, 0}] = 5;  B[{0, 1}] = 6;
-    B[{1, 0}] = 7;  B[{1, 1}] = 8;
+    B[0][0] = 5;  B[0][1] = 6;
+    B[1][0] = 7;  B[1][1] = 8;
 
 
 
@@ -60,15 +62,14 @@ int main() {
     std::cout << (~A);
 
 
-    cout<<"Determinant of A:"<<endl;
+    cout<<"Determinant of A(!):"<<endl;
     std::cout << !A << std::endl;
 
-    // ++A (prefix)
     ++A;
     cout<<"++A:"<<endl;
     std::cout << A;
 
-    // B-- (postfix)
+
     B--;
     cout<<"B--:"<<endl;
     std::cout << B;

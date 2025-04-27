@@ -1,4 +1,5 @@
 // Created by eden on 4/21/25.
+//Edenhassin@gmail.com
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
@@ -45,9 +46,11 @@ TEST_CASE("Helper Functions") {
 }
 
 TEST_CASE("Operator +") {
-    SquareMat a(2), b(2) ,c(3);
-    a[0][0] = 1; a[1][1] = 2;
-    b[0][0] = 2; b[1][1] = 3;
+    SquareMat a(2), b(2), c(3);
+    a[0][0] = 1;
+    a[1][1] = 2;
+    b[0][0] = 2;
+    b[1][1] = 3;
     SquareMat d = a + b;
     CHECK(d[0][0] == 3);
     CHECK(d[1][1] == 5);
@@ -56,8 +59,10 @@ TEST_CASE("Operator +") {
 
 TEST_CASE("Operator -") {
     SquareMat a(2), b(2), c(3);
-    a[0][0] = 5; a[1][1] = 10;
-    b[0][0] = 2; b[1][1] = 15;
+    a[0][0] = 5;
+    a[1][1] = 10;
+    b[0][0] = 2;
+    b[1][1] = 15;
     SquareMat d = a - b;
     CHECK(d[0][0] == 3);
     CHECK(d[1][1] == -5);
@@ -65,9 +70,11 @@ TEST_CASE("Operator -") {
 }
 
 TEST_CASE("Operator * (matrix)") {
-    SquareMat a(2), b(2) ,c(3);
-    a[0][0] = 1; a[0][1] = 2;
-    b[0][0] = 3; b[1][0] = 4;
+    SquareMat a(2), b(2), c(3);
+    a[0][0] = 1;
+    a[0][1] = 2;
+    b[0][0] = 3;
+    b[1][0] = 4;
     SquareMat d = a * b;
     CHECK(d[0][0] == 1*3 + 2*4);
     CHECK_THROWS_AS(a*c, std::invalid_argument);
@@ -75,8 +82,10 @@ TEST_CASE("Operator * (matrix)") {
 
 TEST_CASE("Operator * (scalar)") {
     SquareMat a(2);
-    a[0][0] = 2; a[0][1] = 3;
-    a[1][0] = 4; a[1][1] = 5;
+    a[0][0] = 2;
+    a[0][1] = 3;
+    a[1][0] = 4;
+    a[1][1] = 5;
     SquareMat c = a * 2;
     CHECK(c[0][0] == 4);
     CHECK(c[0][1] == 6);
@@ -85,9 +94,11 @@ TEST_CASE("Operator * (scalar)") {
 }
 
 TEST_CASE("Operator % (matrix)") {
-    SquareMat a(2), b(2) ,c(3);
-    a[0][0] = 1; a[1][1] = 2;
-    b[0][0] = 3; b[1][1] = 4;
+    SquareMat a(2), b(2), c(3);
+    a[0][0] = 1;
+    a[1][1] = 2;
+    b[0][0] = 3;
+    b[1][1] = 4;
     SquareMat d = a % b;
     CHECK(d[0][0] == 3);
     CHECK(d[1][1] == 8);
@@ -96,8 +107,10 @@ TEST_CASE("Operator % (matrix)") {
 
 TEST_CASE("Operator % (scalar)") {
     SquareMat a(2);
-    a[0][0] = 2; a[0][1] = 3;
-    a[1][0] = 6; a[1][1] = 11;
+    a[0][0] = 2;
+    a[0][1] = 3;
+    a[1][0] = 6;
+    a[1][1] = 11;
     SquareMat c = a % 2;
     CHECK(c[0][0] == 0);
     CHECK(c[0][1] == 1);
@@ -107,8 +120,10 @@ TEST_CASE("Operator % (scalar)") {
 
 TEST_CASE("Operator /") {
     SquareMat a(2);
-    a[0][0] = 2; a[0][1] = 4;
-    a[1][0] = 6; a[1][1] = 8;
+    a[0][0] = 2;
+    a[0][1] = 4;
+    a[1][0] = 6;
+    a[1][1] = 8;
     SquareMat c = a / 2;
     CHECK(c[0][0] == 1);
     CHECK(c[0][1] == 2);
@@ -249,7 +264,7 @@ TEST_CASE("operator[] const and non-const") {
         m[1][0] = 15;
         m[1][1] = 20;
 
-        const SquareMat& const_m = m;
+        const SquareMat &const_m = m;
 
         CHECK(const_m[0][0] == 5);
         CHECK(const_m[0][1] == 10);
@@ -259,17 +274,24 @@ TEST_CASE("operator[] const and non-const") {
         CHECK_THROWS_AS((void)const_m[-1][-1], std::out_of_range);
     }
 }
+
 TEST_CASE("Operator ==, !=, <, >, <=, >=") {
     SquareMat a(2), b(2), c(2);
 
-    a[0][0] = 1; a[0][1] = 2;
-    a[1][0] = 3; a[1][1] = 4;
+    a[0][0] = 1;
+    a[0][1] = 2;
+    a[1][0] = 3;
+    a[1][1] = 4;
 
-    b[0][0] = 1; b[0][1] = 2;
-    b[1][0] = 3; b[1][1] = 4;
+    b[0][0] = 1;
+    b[0][1] = 2;
+    b[1][0] = 3;
+    b[1][1] = 4;
 
-    c[0][0] = 5; c[0][1] = 6;
-    c[1][0] = 7; c[1][1] = 8;
+    c[0][0] = 5;
+    c[0][1] = 6;
+    c[1][0] = 7;
+    c[1][1] = 8;
 
     SUBCASE("Equality Check (==)") {
         CHECK(a == b);
@@ -326,8 +348,7 @@ TEST_CASE("Operator !") {
             for (int j = 0; j < 3; ++j) {
                 if (i == j) {
                     c[i][j] = 1;
-                }
-                else {
+                } else {
                     c[i][j] = 0;
                 }
             }
@@ -337,9 +358,15 @@ TEST_CASE("Operator !") {
 
     SUBCASE("3x3 matrix with two identical rows (det = 0)") {
         SquareMat d(3);
-        d[0][0] = 1; d[0][1] = 2; d[0][2] = 3;
-        d[1][0] = 4; d[1][1] = 5; d[1][2] = 6;
-        d[2][0] = 4; d[2][1] = 5; d[2][2] = 6;
+        d[0][0] = 1;
+        d[0][1] = 2;
+        d[0][2] = 3;
+        d[1][0] = 4;
+        d[1][1] = 5;
+        d[1][2] = 6;
+        d[2][0] = 4;
+        d[2][1] = 5;
+        d[2][2] = 6;
         CHECK(!d == doctest::Approx(0));
     }
 }
@@ -347,11 +374,15 @@ TEST_CASE("Operator !") {
 TEST_CASE("Operators +=, -=, *=, /=, %=") {
     SUBCASE("operator+=") {
         SquareMat a(2), b(2);
-        a[0][0] = 1; a[0][1] = 2;
-        a[1][0] = 3; a[1][1] = 4;
+        a[0][0] = 1;
+        a[0][1] = 2;
+        a[1][0] = 3;
+        a[1][1] = 4;
 
-        b[0][0] = 5; b[0][1] = 6;
-        b[1][0] = 7; b[1][1] = 8;
+        b[0][0] = 5;
+        b[0][1] = 6;
+        b[1][0] = 7;
+        b[1][1] = 8;
 
         a += b;
 
@@ -363,11 +394,15 @@ TEST_CASE("Operators +=, -=, *=, /=, %=") {
 
     SUBCASE("operator-=") {
         SquareMat a(2), b(2);
-        a[0][0] = 9; a[0][1] = 8;
-        a[1][0] = 7; a[1][1] = 6;
+        a[0][0] = 9;
+        a[0][1] = 8;
+        a[1][0] = 7;
+        a[1][1] = 6;
 
-        b[0][0] = 1; b[0][1] = 2;
-        b[1][0] = 3; b[1][1] = 4;
+        b[0][0] = 1;
+        b[0][1] = 2;
+        b[1][0] = 3;
+        b[1][1] = 4;
 
         a -= b;
 
@@ -379,24 +414,30 @@ TEST_CASE("Operators +=, -=, *=, /=, %=") {
 
     SUBCASE("operator*=(matrix)") {
         SquareMat a(2), b(2);
-        a[0][0] = 1; a[0][1] = 2;
-        a[1][0] = 3; a[1][1] = 4;
+        a[0][0] = 1;
+        a[0][1] = 2;
+        a[1][0] = 3;
+        a[1][1] = 4;
 
-        b[0][0] = 2; b[0][1] = 0;
-        b[1][0] = 1; b[1][1] = 2;
+        b[0][0] = 2;
+        b[0][1] = 0;
+        b[1][0] = 1;
+        b[1][1] = 2;
 
         a *= b;
 
-        CHECK(a[0][0] == 4);  // 1*2 + 2*1
-        CHECK(a[0][1] == 4);  // 1*0 + 2*2
+        CHECK(a[0][0] == 4); // 1*2 + 2*1
+        CHECK(a[0][1] == 4); // 1*0 + 2*2
         CHECK(a[1][0] == 10); // 3*2 + 4*1
-        CHECK(a[1][1] == 8);  // 3*0 + 4*2
+        CHECK(a[1][1] == 8); // 3*0 + 4*2
     }
 
     SUBCASE("operator*=(scalar)") {
         SquareMat a(2), b(2);
-        a[0][0] = 1; a[0][1] = 2;
-        a[1][0] = 3; a[1][1] = 4;
+        a[0][0] = 1;
+        a[0][1] = 2;
+        a[1][0] = 3;
+        a[1][1] = 4;
 
         a *= 2;
 
@@ -408,8 +449,10 @@ TEST_CASE("Operators +=, -=, *=, /=, %=") {
 
     SUBCASE("operator/=") {
         SquareMat a(2);
-        a[0][0] = 2; a[0][1] = 4;
-        a[1][0] = 6; a[1][1] = 8;
+        a[0][0] = 2;
+        a[0][1] = 4;
+        a[1][0] = 6;
+        a[1][1] = 8;
 
         a /= 2;
 
@@ -423,11 +466,15 @@ TEST_CASE("Operators +=, -=, *=, /=, %=") {
 
     SUBCASE("operator%=(matrix)") {
         SquareMat a(2), b(2);
-        a[0][0] = 1; a[0][1] = 2;
-        a[1][0] = 3; a[1][1] = 4;
+        a[0][0] = 1;
+        a[0][1] = 2;
+        a[1][0] = 3;
+        a[1][1] = 4;
 
-        b[0][0] = 2; b[0][1] = 0;
-        b[1][0] = 1; b[1][1] = 2;
+        b[0][0] = 2;
+        b[0][1] = 0;
+        b[1][0] = 1;
+        b[1][1] = 2;
 
         a %= b;
 
@@ -439,8 +486,10 @@ TEST_CASE("Operators +=, -=, *=, /=, %=") {
 
     SUBCASE("operator%=(scalar)") {
         SquareMat a(2), b(2);
-        a[0][0] = 1; a[0][1] = 2;
-        a[1][0] = 4; a[1][1] = 6;
+        a[0][0] = 1;
+        a[0][1] = 2;
+        a[1][0] = 4;
+        a[1][1] = 6;
 
         a %= 2;
 
@@ -458,6 +507,3 @@ TEST_CASE("Operators +=, -=, *=, /=, %=") {
         CHECK_THROWS(a %= b);
     }
 }
-
-
-
