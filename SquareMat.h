@@ -14,7 +14,7 @@ namespace Matrix {
         double **matrix;
 
     public:
-        SquareMat(int n);
+        SquareMat(int s);
 
         SquareMat(const SquareMat &other); // Copy Constructor
         SquareMat &operator=(const SquareMat &other); // Copy Assignment Operator

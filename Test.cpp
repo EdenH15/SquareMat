@@ -32,6 +32,8 @@ TEST_CASE("Constructors") {
     CHECK(m3[0][0] == 5);
     CHECK(m3[1][1] == 10);
     CHECK(m3[2][2] == 15);
+
+    CHECK_THROWS_AS(SquareMat m4(0), std::invalid_argument);
 }
 
 TEST_CASE("Helper Functions") {

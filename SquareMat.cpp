@@ -10,6 +10,9 @@
 namespace Matrix {
     // Constructor: Initializes a square matrix with given size
     SquareMat::SquareMat(int s): size(s) {
+        if (s<=0) {
+            throw std::invalid_argument("Matrix must have a positive size");
+        }
         matrix = new double *[size];
         for (int i = 0; i < size; i++) {
             matrix[i] = new double[size];
@@ -38,20 +41,19 @@ namespace Matrix {
     // Assignment operator: Copies matrix data from another object
     SquareMat &SquareMat::operator=(const SquareMat &other) {
         if (this != &other) {
+            double** newMatrix = new double*[other.size];
+            for (int i = 0; i < other.size; ++i) {
+                newMatrix[i] = new double[other.size];
+                for (int j = 0; j < other.size; ++j) {
+                    newMatrix[i][j] = other.matrix[i][j];
+                }
+            }
             for (int i = 0; i < size; ++i) {
                 delete[] matrix[i];
             }
             delete[] matrix;
-
             size = other.size;
-            matrix = new double *[size];
-
-            for (int i = 0; i < size; ++i) {
-                matrix[i] = new double[size];
-                for (int j = 0; j < size; ++j) {
-                    matrix[i][j] = other.matrix[i][j];
-                }
-            }
+            matrix = newMatrix;
         }
         return *this;
     }
